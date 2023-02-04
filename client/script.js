@@ -7,7 +7,7 @@ const chatContainer = document.querySelector('#chat_container');
 
 let loadInterval;
 
-//load Masseges and render '...'
+//load Masseges und render '...'
 function loader(element) {
   element.textContent = '';
 
@@ -64,7 +64,7 @@ function chatStripe (isAi, value, uniqueId) {
 
 }
 
-//handel submit function to be trager to get ai genereter response
+//handel submit function um zu trager get ai genereter response
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -89,7 +89,9 @@ const handleSubmit = async (e) => {
 
 
   // fetch data from server -> bot response
+  
   const response = await fetch('http://localhost:5000', {
+    
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -103,18 +105,19 @@ const handleSubmit = async (e) => {
 
   if (response.ok) {
     const data = await response.json();
-    const parseData = data.bot.trim();
+    const parsedData = data.bot.trim();
 
     //console.log({parsedData})
 
 
-    typeText(messageDiv, parseData);
+    typeText(messageDiv, parsedData);
   } else {
     const err = await response.text();
     messageDiv.innerHTML = "Etwas schief gelaufen";
     alert(err);
   }
 }
+
 form.addEventListener('submit', handleSubmit);
 form.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
